@@ -47,7 +47,7 @@ BDEPEND="
 	riscv? ( sys-apps/dtc )
 "
 
-IUSE="+strip minimal"
+IUSE="+strip local-modules"
 
 # @ECLASS_VARIABLE: KERNEL_IUSE_MODULES_SIGN
 # @PRE_INHERIT
@@ -224,7 +224,7 @@ kernel-build_src_configure() {
 	mv .config "${WORKDIR}"/modprep/ || die
 	emake O="${WORKDIR}"/modprep "${MAKEARGS[@]}" olddefconfig
 
-	if use minimal; then
+	if use local-modules; then
 		emake O="${WORKDIR}"/modprep "${MAKEARGS[@]}" localmodconfig
 	fi
 
